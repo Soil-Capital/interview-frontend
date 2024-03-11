@@ -19,6 +19,7 @@ const slice = createSlice({
             ...state,
             access_token: payload,
             partnerId: parseInt(jose.decodeJwt(payload).partner_id as string),
+            user: jose.decodeJwt(payload).user as UserI,
         }),
     },
     extraReducers: (builder) => {
