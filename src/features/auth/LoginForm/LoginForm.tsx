@@ -2,6 +2,7 @@ import { Box, Button, Checkbox, Link, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
+import * as jose from 'jose';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLoginMutation } from '@services';
@@ -35,6 +36,18 @@ function LoginForm() {
     const onSubmit = async (data: LoginFormDataT) => {
         try {
             const body = await login(data).unwrap();
+
+            const secret = new TextEncoder().encode(data.password);
+            const token = await new jose.SignJWT(body[0])
+                .setProtectedHeader({ alg: 'HS256' })
+                .setIssuedAt()
+                .setIssuer('')
+                .setAudience('')
+                .setExpirationTime('1y')
+                .sign(secret);
+
+            setStorageToken(token, data.remember);
+
             navigate('/');
         } catch (err) {
             console.error(err);

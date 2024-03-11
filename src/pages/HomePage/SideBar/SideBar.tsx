@@ -29,6 +29,22 @@ function SideBar() {
                     />
                 </div>
             </ListItem>
+            <ListItem
+                className={`${classes.navLink} ${useMatch('/photos') && classes.navLinkActive}`}
+                component="span"
+                button
+                onClick={() => navigate('/photos')}
+            >
+                <ListItemIcon>
+                    <SvgIcon className={classes.listItemIcon} component={DashboardOutlinedIcon} viewBox="0 0 24 24" />
+                </ListItemIcon>
+                <div className={classes.nameContainer}>
+                    <ListItemText
+                        primary={t('titles.photos')}
+                        primaryTypographyProps={{ className: classes.listItemText }}
+                    />
+                </div>
+            </ListItem>
         </List>
     );
 }

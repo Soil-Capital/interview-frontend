@@ -1,4 +1,5 @@
 import { DashboardSection } from '@features/dashboard';
+import { PhotosSection } from '@features/photos';
 import { HomePage, LoginPage } from '@pages';
 import { Guard } from '@utils';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -11,6 +12,7 @@ function Router() {
         <Routes>
             <Route path="/" element={<Guard target={<HomePage />} guards={['authenticated']} />}>
                 <Route index element={<DashboardSection />} />
+                <Route path='/photos' element={<PhotosSection />} />
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="*" element={<Navigate to="/login" />} />
