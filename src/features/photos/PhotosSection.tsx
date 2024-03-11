@@ -8,7 +8,6 @@ const PhotosSection = () => {
     return <LoadingPage />
   }
 
-  // @todo - improve
   if (error) {
     return <span>An error occured</span>
   }
@@ -16,7 +15,7 @@ const PhotosSection = () => {
   return (
     <div>
       {data?.slice(0, 3).map(({ title, url }) => (
-        <img src={url} alt={title} />
+        <img key={url} src={url} alt={title} />
       ))}
     </div>
   );
