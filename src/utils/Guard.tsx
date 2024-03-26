@@ -10,16 +10,23 @@ type GuardT = {
 
 function Guard({ target, guards }: GuardT): React.ReactElement {
     let redirectUrl = null;
-    const { user } = useAuth();
+    const { user: userFromState } = useAuth();
+    const str = localStorage.getItem('user');
+    const userFromLocalStorage = JSON.parse(str ?? '{}');
+    const user = userFromState ?? userFromLocalStorage;
 
+    console.log('LOCAL STORAGE VALUE', userFromLocalStorage);
     for (let i = 0; i < guards.length; i++) {
         switch (guards[i]) {
             case 'authenticated':
-                if (!user?.id) {
+                // check for success instead of failure
+                // if user meets auth criteria let them in, otherwise, no go!
+                if (!!user?.id) {
+                    continue;
+                } else {
                     redirectUrl = '/login';
                     break;
                 }
-                break;
             default:
                 break;
         }
