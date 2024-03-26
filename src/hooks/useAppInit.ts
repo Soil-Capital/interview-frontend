@@ -16,6 +16,7 @@ export const useAppInit = () => {
             setInitialized(true);
         }
 
+       
         loadToken();
     }, []);
 

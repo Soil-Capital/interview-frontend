@@ -374,6 +374,7 @@
   },
   "roles": {
     "name": {
+      "photos": "Afbeelden",
       "admin": "Administrator",
       "collaborator": "Medewerker",
       "guest": "Gast",

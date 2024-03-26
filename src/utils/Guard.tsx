@@ -15,7 +15,6 @@ function Guard({ target, guards }: GuardT): React.ReactElement {
     const userFromLocalStorage = JSON.parse(str ?? '{}');
     const user = userFromState ?? userFromLocalStorage;
 
-    console.log('LOCAL STORAGE VALUE', userFromLocalStorage);
     for (let i = 0; i < guards.length; i++) {
         switch (guards[i]) {
             case 'authenticated':

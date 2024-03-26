@@ -16,8 +16,6 @@ const slice = createSlice({
     initialState,
     reducers: {
         addToken: (state, { payload }) => {
-            // store the token in local storage || it's a dirty trick as this would break other things if the app as fully implemented and a more elegant solution would be better!
-            localStorage.setItem('authenticated', '1');
             return {
                 ...state,
                 access_token: payload,
@@ -27,7 +25,9 @@ const slice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-            state.user = payload[0] as any;
+            const user = payload[0] as any;
+            localStorage.setItem('user', JSON.stringify(user));
+            state.user = user;
         });
     },
 });
