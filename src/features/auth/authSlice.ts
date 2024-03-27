@@ -15,15 +15,19 @@ const slice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        addToken: (state, { payload }) => ({
-            ...state,
-            access_token: payload,
-            partnerId: parseInt(jose.decodeJwt(payload).partner_id as string),
-        }),
+        addToken: (state, { payload }) => {
+            return {
+                ...state,
+                access_token: payload,
+                partnerId: parseInt(jose.decodeJwt(payload).partner_id as string),
+            };
+        },
     },
     extraReducers: (builder) => {
         builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-            state.user = payload[0] as any;
+            const user = payload[0] as any;
+            localStorage.setItem('user', JSON.stringify(user));
+            state.user = user;
         });
     },
 });

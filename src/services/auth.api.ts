@@ -21,6 +21,7 @@ export const authApi = api.injectEndpoints({
             transformResponse: (response: UserT[]) => {
                 if (response.length) {
                     i18n.changeLanguage('en');
+                    localStorage.setItem('user', JSON.stringify(response[0]));
                     return response;
                 }
                 throw new Error('ACCESS_DENIED');
