@@ -505,6 +505,7 @@
   },
   "titles": {
     "photos": "Photos",
+    "albums": "Albums",
     "accept-invite": "Bienvenue sur Soil Capital. Tout d’abord, créons votre compte.",
     "accept-invite-error": {
       "invitation-invalid": "Invitation non valide",

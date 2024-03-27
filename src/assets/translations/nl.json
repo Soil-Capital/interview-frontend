@@ -374,6 +374,7 @@
   },
   "roles": {
     "name": {
+      "albums": "Albums",
       "photos": "Afbeelden",
       "admin": "Administrator",
       "collaborator": "Medewerker",

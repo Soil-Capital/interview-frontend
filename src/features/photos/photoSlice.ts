@@ -15,9 +15,10 @@ const slice = createSlice({
     initialState,
     reducers: {
         setPhoto: (state, { payload }) => {
+            const photo = payload ? state.thumbnails.find(pic => pic.id === payload) : null;
             return {
                 ...state,
-                photo: payload
+                photo
             };
         },
     },

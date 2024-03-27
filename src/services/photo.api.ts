@@ -7,12 +7,12 @@ export const photoApi = api.injectEndpoints({
     endpoints: (builder) => ({
         photo: builder.mutation<PhotoI[], string>({
             query: (id: string) => ({
-                    url:`photos?id=${id}`,
-                    method: 'GET',
-                }),
+                url: `photos?id=${id}`,
+                method: 'GET',
+            }),
             transformResponse: (response: PhotoI[]) => {
-                    i18n.changeLanguage('en');
-                    return response;
+                i18n.changeLanguage('en');
+                return response;
             },
         }),
         photos: builder.mutation<PhotoI, void>({
@@ -26,4 +26,4 @@ export const photoApi = api.injectEndpoints({
 
 export const { usePhotoMutation, usePhotosMutation } = photoApi;
 
-export * from './auth.types';
+export * from './photo.types';

@@ -1,18 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectThumbnails, selectCurrentPhoto } from '@features/photos';
-import { PhotoI } from '@services';
+import { PhotoI, CollectionT } from '@services';
 
-export const usePhotos = ({ page, album }: { page: number, album: number }) => {
+export const usePhotos = ({ album }: { album: number }) => {
     const photo = useSelector(selectCurrentPhoto);
 
     const thumbnails = useSelector(selectThumbnails)
-    const [albums, setAlbums] = useState([])
-    const [organized, setOrganized] = useState({} as { [key: number]: PhotoI[] })
-    useEffect(() => {
+    const [albums, setAlbums] = useState<{ id: number, label: string }[]>([]);
+    const [organized, setOrganized] = useState({} as CollectionT)
 
-        const albumSet = new Set();
-        const photoMap = {}
+    useEffect(() => {
+        const albumSet = new Set<number>();
+        const photoMap = {} as CollectionT
         for (const thumbnail of thumbnails) {
             const albumId = thumbnail.albumId;
             if (photoMap[albumId]) {
@@ -22,10 +22,13 @@ export const usePhotos = ({ page, album }: { page: number, album: number }) => {
             }
             albumSet.add(albumId);
         }
-        setAlbums(Array.from(albumSet, albumId => ({ id: albumId, label: albumId })));
+
+        // Get unique album ids
+        setAlbums(Array.from(albumSet, (albumId: number) => ({ id: albumId, label: <unknown>albumId as string })));
+
+        // store map for easier retrieval
         setOrganized(photoMap)
 
-        console.log([Object.keys(organized).length, Object.keys(organized), albums]);
     }, [thumbnails, album]);
 
 
